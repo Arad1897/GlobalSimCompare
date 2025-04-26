@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "provider": "Airalo",
+    "providerLogoUrl": "https://cdn.airalo.com/assets/images/svg/Logo.svg",  
+    "region": "Europe",
+    "data": "5GB",
+    "validity": "30 days",
+    "price": 20,
+    "network": "Multiple European networks",
+    "includesCallsSMS": false,
+    "features": ["Data Only", "Works in 39 Countries"],
+    "affiliateLink": "www.airalo.com"
+  },
+  {
+    "id": 2,
+    "provider": "Nomad",
+    "providerLogoUrl": "https://www.getnomad.app/nomad-logo-dark-blue.png", 
+    "region": "USA",
+    "data": "10GB",
+    "validity": "30 days",
+    "price": 28,
+    "network": "T-Mobile, AT&T",
+    "includesCallsSMS": false,
+    "features": ["Data Only", "Hotspot Allowed"],
+    "affiliateLink": "https://www.getnomad.app"
+  },
+  {
+    "id": 3,
+    "provider": "Holafly",
+     "providerLogoUrl": "https://holafly.com/cdn/shop/files/Holafly-logo-color_140x.png", 
+    "region": "Spain",
+    "data": "Unlimited",
+    "validity": "15 days",
+    "price": 47,
+    "network": "Movistar",
+    "includesCallsSMS": true,
+    "features": ["Unlimited Data", "Includes Calls (Local)", "Hotspot Limited"],
+    "affiliateLink": "https://esim.holafly.com"
+  },
+   {
+    "id": 4,
+    "provider": "Airalo",
+    "providerLogoUrl": "https://cdn.airalo.com/assets/images/svg/Logo.svg",
+    "region": "Asia",
+    "data": "20GB",
+    "validity": "90 days",
+    "price": 55,
+    "network": "Various regional networks",
+    "includesCallsSMS": false,
+    "features": ["Data Only", "Works in 13 Countries"],
+    "affiliateLink": "www.airalo.com"
+  },
+   {
+    "id": 5,
+    "provider": "Nomad",
+    "providerLogoUrl": "https://www.getnomad.app/nomad-logo-dark-blue.png", 
+    "region": "Global",
+    "data": "1GB",
+    "validity": "7 days",
+    "price": 9,
+    "network": "Multiple global networks",
+    "includesCallsSMS": false,
+    "features": ["Data Only", "Lowest Price Option"],
+    "affiliateLink": "https://www.getnomad.app"
+  },
+  {
+    "id": 6,
+    "provider": "Holafly",
+     "providerLogoUrl": "https://holafly.com/cdn/shop/files/Holafly-logo-color_140x.png", 
+    "region": "USA",
+    "data": "Unlimited",
+    "validity": "30 days",
+    "price": 69,
+    "network": "AT&T",
+    "includesCallsSMS": true,
+    "features": ["Unlimited Data", "Includes Calls (Local)"],
+    "affiliateLink": "https://esim.holafly.com"
+  }
+]
