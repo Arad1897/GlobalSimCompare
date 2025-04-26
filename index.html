@@ -3,18 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalSimCompare - Compare Best eSIM Deals</title>
+  <title>Compare Best eSIM Deals for Travel - GlobalSimCompare</title>
+  <meta name="description" content="Find and compare the best international eSIM deals for your next trip. Get affordable data plans for Europe, USA, Asia, and more from top providers like Airalo, Nomad, Holafly.">
+
+  <!-- Favicon Link -->
+  <!-- You need to place your favicon.ico or favicon.png file in the same folder as this index.html -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <!-- Add more sizes/types if you have them, but .ico and .png are usually enough -->
+
   <style>
     :root {
       --bg-color: #f0f2f5;
       --text-color: #333;
       --accent-color: #007BFF;
+      --accent-dark: #0056b3;
+      --accent-light: #4dabf7;
       --transition-speed: 0.3s;
+      --border-color-light: #ddd;
+      --border-color-dark: #444;
+      --card-bg-light: white;
+      --card-bg-dark: #2a2a2a;
+      --hover-bg-light: #f1f1f1;
+      --hover-bg-dark: #333;
     }
     body.dark-mode {
       --bg-color: #1e1e1e;
       --text-color: #f0f2f5;
       --accent-color: #4dabf7;
+      --accent-dark: #74c0fc;
+      --accent-light: #4dabf7;
+      --border-color-light: #444;
+      --border-color-dark: #555;
+      --card-bg-light: #2a2a2a;
+      --card-bg-dark: #2a2a2a;
+      --hover-bg-light: #333;
+      --hover-bg-dark: #444;
     }
     body {
       background-color: var(--bg-color);
@@ -23,6 +47,7 @@
       margin: 0;
       padding: 0;
       transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.6;
     }
     header {
       display: flex;
@@ -33,6 +58,7 @@
       color: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       animation: slideDown 0.5s ease-out;
+      flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     }
     @keyframes slideDown {
       from { transform: translateY(-100%); }
@@ -43,12 +69,24 @@
       font-weight: bold;
       cursor: pointer;
       transition: transform 0.3s;
+      margin-right: 1rem; /* Space between logo and button */
     }
     .logo:hover {
       transform: scale(1.05);
     }
+     @media (max-width: 600px) {
+        header {
+            justify-content: center; /* Center items when they wrap */
+            text-align: center;
+        }
+        .logo {
+            margin-right: 0;
+            margin-bottom: 0.5rem; /* Space below logo when stacked */
+        }
+     }
+
     #theme-toggle {
-      background: white;
+      background: var(--card-bg-light); /* White in light, dark-card in dark */
       color: var(--accent-color);
       border: none;
       padding: 0.5rem 1rem;
@@ -56,14 +94,26 @@
       cursor: pointer;
       font-weight: bold;
       transition: background var(--transition-speed), color var(--transition-speed);
+      flex-shrink: 0; /* Prevent button from shrinking */
     }
     #theme-toggle:hover {
-      background: var(--accent-color);
+      background: var(--accent-dark);
       color: white;
     }
+     body.dark-mode #theme-toggle {
+        background: var(--card-bg-dark);
+        color: var(--accent-color);
+     }
+     body.dark-mode #theme-toggle:hover {
+        background: var(--accent-dark);
+        color: white;
+     }
+
+
     main {
       padding: 2rem;
-      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
       animation: fadeIn 1s ease-in;
     }
     @keyframes fadeIn {
@@ -71,38 +121,174 @@
       to { opacity: 1; }
     }
     h1 {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       font-size: 2.5rem;
+      text-align: center;
+      color: var(--text-color); /* Use text color variable */
     }
+    h2 {
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-color); /* Use text color variable */
+    }
+     h3 {
+        font-size: 1.3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-color); /* Use text color variable */
+     }
+
+    .intro, .popular-destinations, .how-it-works, .filters, .comparison-table, .section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background-color: var(--card-bg-light);
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        color: var(--text-color);
+        transition: background-color var(--transition-speed);
+    }
+
+     body.dark-mode .intro,
+     body.dark-mode .popular-destinations,
+     body.dark-mode .how-it-works,
+     body.dark-mode .filters,
+     body.dark-mode .comparison-table,
+     body.dark-mode .section {
+         background-color: var(--card-bg-dark);
+     }
+
+    .filters, .sort-controls {
+      display: flex;
+      flex-wrap: wrap; /* Allow controls to wrap */
+      align-items: center;
+      gap: 1rem; /* Space between controls */
+    }
+     .filters label, .sort-controls label {
+        font-weight: bold;
+        flex-shrink: 0; /* Prevent labels from shrinking */
+     }
+     .filters select, .sort-controls select, .sort-controls button {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+        background-color: var(--card-bg-light);
+        color: var(--text-color);
+     }
+
+     body.dark-mode .filters select,
+     body.dark-mode .sort-controls select,
+     body.dark-mode .sort-controls button {
+         background-color: #333;
+         color: white;
+         border-color: #555;
+     }
+
+     .filters select:focus,
+     .sort-controls select:focus,
+     .sort-controls button:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Match accent color */
+     }
+     .sort-controls button {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+     }
+      .sort-controls button:hover {
+        background-color: var(--accent-dark);
+      }
+      body.dark-mode .sort-controls button {
+          background-color: var(--accent-color);
+      }
+      body.dark-mode .sort-controls button:hover {
+          background-color: var(--accent-dark);
+      }
+      .sort-controls button svg {
+        margin-left: 0.5rem;
+      }
+
+
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
+      background: var(--card-bg-light);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      margin-top: 1.5rem; /* Space below filters/sort */
+      transition: background-color var(--transition-speed);
     }
-    table:hover {
-      transform: scale(1.01);
+
+    body.dark-mode table {
+      background-color: var(--card-bg-dark);
     }
+
     th, td {
       padding: 1rem;
       text-align: center;
-      border-bottom: 1px solid #ddd;
-      transition: background-color var(--transition-speed);
+      border-bottom: 1px solid var(--border-color-light);
+      transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
     }
+     body.dark-mode td {
+        border-bottom: 1px solid var(--border-color-dark);
+        color: var(--text-color);
+     }
+
     th {
       background-color: var(--accent-color);
       color: white;
+      font-weight: bold;
     }
+
+    body.dark-mode th {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
     tbody tr:hover {
-      background-color: #f1f1f1;
+      background-color: var(--hover-bg-light);
     }
+
+    body.dark-mode tbody tr:hover {
+      background-color: var(--hover-bg-dark);
+    }
+
+     td img.provider-logo {
+        height: 20px; /* Adjust size as needed */
+        vertical-align: middle;
+        margin-right: 5px;
+     }
+
+     td .features-list {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         font-size: 0.9em;
+         display: flex;
+         justify-content: center;
+         flex-wrap: wrap;
+     }
+      td .features-list li {
+         margin: 0 0.5em 0.2em 0.5em;
+      }
+      td .features-list li:before {
+          content: "• "; /* Add a bullet point */
+          color: var(--accent-color);
+          font-weight: bold;
+      }
+
+
     .buy-button {
       background: var(--accent-color);
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.2rem; /* Slightly larger padding */
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
@@ -110,13 +296,22 @@
       display: inline-block;
     }
     .buy-button:hover {
-      background: #0056b3;
+      background: var(--accent-dark);
       transform: scale(1.05);
     }
+
+     body.dark-mode .buy-button {
+        background: var(--accent-color);
+     }
+      body.dark-mode .buy-button:hover {
+        background: var(--accent-dark);
+     }
+
+
     footer {
       text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+      padding: 1.5rem;
+      margin-top: 3rem;
       font-size: 0.9rem;
       background-color: var(--accent-color);
       color: white;
@@ -126,24 +321,138 @@
       color: white;
       text-decoration: none;
       margin: 0 0.5rem;
+      transition: text-decoration 0.3s;
     }
     footer a:hover {
       text-decoration: underline;
     }
-    body.dark-mode table {
-      background-color: #2a2a2a;
+
+    /* Affiliate Disclaimer */
+    .disclaimer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #777;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
-    body.dark-mode th {
-      background-color: #4dabf7;
-      color: white;
+     body.dark-mode .disclaimer {
+        color: #bbb;
+     }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        header {
+            padding: 1rem;
+        }
+        main {
+            padding: 1rem;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+         h3 {
+            font-size: 1.2rem;
+         }
+        th, td {
+            padding: 0.8rem;
+        }
+         .intro, .popular-destinations, .how-it-works, .filters, .comparison-table, .section {
+             padding: 1rem;
+             margin-bottom: 1.5rem;
+         }
+
+         /* Stack filter and sort controls */
+         .filters, .sort-controls {
+             flex-direction: column;
+             align-items: flex-start;
+             gap: 0.8rem;
+         }
+         .filters label, .sort-controls label {
+             margin-bottom: 0.2rem; /* Small space below label */
+         }
+          .filters select, .sort-controls select, .sort-controls button {
+              width: 100%; /* Make controls full width */
+          }
+           .sort-controls button svg {
+                margin-left: auto; /* Push icon to the right */
+           }
+
+
+         /* Mobile table view */
+         table, thead, tbody, th, td, tr {
+            display: block;
+         }
+         thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+         }
+         tr { border: 1px solid var(--border-color-light); margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; }
+         body.dark-mode tr { border-color: var(--border-color-dark); }
+
+         td {
+            border: none;
+            border-bottom: 1px solid var(--border-color-light);
+            position: relative;
+            padding-left: 50%;
+            text-align: right; /* Align value to the right */
+         }
+         body.dark-mode td {
+            border-bottom: 1px solid var(--border-color-dark);
+         }
+         td:last-child {
+            border-bottom: 0; /* No border for the last cell */
+         }
+
+         td:before {
+            position: absolute;
+            top: 0;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            text-align: left; /* Align label to the left */
+            content: attr(data-label); /* Use data-label attribute for content */
+         }
+          /* Ensure features list is left-aligned in mobile */
+         td .features-list {
+             justify-content: flex-end; /* Align features to the right edge under value */
+             margin-top: 0.5em; /* Space from the value above */
+         }
+          td .features-list li {
+              margin: 0 0.2em; /* Reduce margin between features */
+          }
+         td .features-list li:before {
+             content: ""; /* Remove bullet point in mobile view if desired, or keep it */
+         }
+
+
+          /* Adjustments for buy button in mobile view */
+         td:nth-last-child(1) { /* Target the last td (Buy Now) */
+            text-align: center; /* Center the button */
+            padding: 1rem; /* Give it some space */
+            padding-left: 1rem; /* Reset padding-left */
+         }
+         td:nth-last-child(1):before { content: ""; } /* Remove label for buy button */
+
+          /* Adjust padding for cells with provider logo or complex content */
+         td:has(.provider-logo), td:has(.features-list) {
+             text-align: right; /* Keep value to the right */
+         }
+
+         footer {
+             margin-top: 2rem;
+         }
+
+
     }
-    body.dark-mode td {
-      color: white;
-      border-bottom: 1px solid #444;
-    }
-    body.dark-mode tbody tr:hover {
-      background-color: #333;
-    }
+
+
   </style>
 </head>
 <body>
@@ -153,55 +462,352 @@
   </header>
   <main>
     <h1>Compare the Best eSIM Deals for Global Travelers</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Provider</th>
-          <th>Data</th>
-          <th>Validity</th>
-          <th>Price</th>
-          <th>Buy Now</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Airalo</td>
-          <td>5GB</td>
-          <td>30 days</td>
-          <td>$20</td>
-          <td><a href="#" class="buy-button">Buy</a></td>
-        </tr>
-        <tr>
-          <td>Nomad</td>
-          <td>10GB</td>
-          <td>60 days</td>
-          <td>$40</td>
-          <td><a href="#" class="buy-button">Buy</a></td>
-        </tr>
-        <tr>
-          <td>Holafly</td>
-          <td>Unlimited</td>
-          <td>15 days</td>
-          <td>$60</td>
-          <td><a href="#" class="buy-button">Buy</a></td>
-        </tr>
-      </tbody>
-    </table>
+
+    <section class="intro section">
+      <p>Welcome to GlobalSimCompare, your ultimate resource for finding the best and most affordable eSIM deals for your international adventures. Forget swapping physical SIM cards or paying expensive roaming charges. With an eSIM, you can easily activate a local data plan directly on your phone, staying connected from the moment you arrive.</p>
+      <p>Our easy-to-use comparison tool helps you quickly find the right eSIM plan based on your destination, data needs, and trip duration. We compare deals from leading providers like Airalo, Nomad, Holafly, and more, bringing you transparent pricing and direct links to purchase.</p>
+       <p class="disclaimer">Disclaimer: We use affiliate links. If you purchase a plan through our links, we may earn a commission at no extra cost to you. This helps support our site.</p>
+    </section>
+
+    <section class="filters section">
+      <h2>Find Your Perfect eSIM Plan</h2>
+      <div class="filters">
+          <label for="region-filter">Select Region:</label>
+          <select id="region-filter">
+            <option value="all">All Regions</option>
+            <!-- Options will be added by JavaScript -->
+          </select>
+           <!-- Placeholder for future filters (e.g., data range, validity) -->
+           <!--
+           <label for="data-filter">Minimum Data:</label>
+           <select id="data-filter">
+               <option value="0">Any Data</option>
+               <option value="1">1GB+</option>
+               <option value="5">5GB+</option>
+               <option value="10">10GB+</option>
+               <option value="unlimited">Unlimited</option>
+           </select>
+           -->
+      </div>
+       <div class="sort-controls">
+            <label for="sort-by">Sort By:</label>
+            <select id="sort-by">
+                <option value="price">Price</option>
+                <option value="data">Data Amount</option>
+                <option value="validity">Validity</option>
+                <option value="provider">Provider</option>
+            </select>
+             <button id="sort-direction" data-direction="asc" aria-label="Toggle sort direction">
+                 Asc
+                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                  </svg>
+             </button>
+       </div>
+    </section>
+
+    <section class="comparison-table section">
+      <h2>Available eSIM Deals</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Region</th>
+            <th>Data</th>
+            <th>Validity</th>
+            <th>Price</th>
+            <th>Network</th>
+            <th>Features</th>
+            <th>Buy Now</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be loaded here by JavaScript -->
+          <tr>
+            <td colspan="8" style="text-align: center;">Loading deals...</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="popular-destinations section">
+      <h2>Popular eSIM Destinations & Regional Guides</h2>
+      <p>Find specific eSIM deals and tips for our most popular travel destinations. Click on a region to see the best options available.</p>
+      <ul>
+        <li><a href="#" data-region-filter="Europe">🇪🇺 eSIM for Europe</a></li>
+        <li><a href="#" data-region-filter="USA">🇺🇸 eSIM for USA</a></li>
+        <li><a href="#" data-region-filter="Asia">🌏 eSIM for Asia (Multi-Country)</a></li>
+        <li><a href="#" data-region-filter="UK">🇬🇧 eSIM for UK</a></li>
+        <li><a href="#" data-region-filter="Canada">🇨🇦 eSIM for Canada</a></li>
+        <li><a href="#" data-region-filter="Mexico">🇲🇽 eSIM for Mexico</a></li>
+        <!-- Add more destination links, linking to the region filter -->
+        <li><a href="#" data-region-filter="all">🌍 All Global Deals</a></li>
+      </ul>
+      <p>We also offer detailed guides for <a href="#">using eSIMs in France</a>, <a href="#">getting connected in Italy</a>, and more coming soon!</p>
+      <!-- These links could eventually go to separate pages for deeper content -->
+    </section>
+
+    <section class="how-it-works section">
+      <h2>How to Get and Use an eSIM</h2>
+      <p>Getting connected with an eSIM is easier than you think! Most modern smartphones (including iPhone 11 or later, Google Pixel 3a or later, and many Samsung Galaxy models) support eSIM technology.</p>
+      <p>Here are the basic steps:</p>
+      <ol>
+        <li>**Check Compatibility:** Ensure your phone supports eSIMs and is unlocked.</li>
+        <li>**Choose Your Plan:** Use our comparison tool to find the best deal for your destination and data needs.</li>
+        <li>**Purchase:** Click the "Buy Now" button to go to the provider's website and complete your purchase securely.</li>
+        <li>**Install:** You'll receive an email with a QR code or activation code. Scan the code via your phone's settings or enter the details manually to install the eSIM profile.</li>
+        <li>**Activate:** Follow any final activation steps from the provider. Often, the plan only becomes active when it connects to a supported network in your destination.</li>
+        <li>**Connect:** Upon arrival, ensure your new eSIM is turned on in your phone settings and enjoy seamless data!</li>
+      </ol>
+       <p>Need more help? Check out our <a href="#">detailed eSIM installation guide</a>.</p>
+    </section>
+
   </main>
   <footer>
-    <p>© 2025 GlobalSimCompare. All rights reserved.</p>
-    <p><a href="#">About Us</a> | <a href="#">Contact</a></p>
+    <p>© <span id="current-year"></span> GlobalSimCompare. All rights reserved.</p>
+    <p><a href="/about.html">About Us</a> | <a href="/contact.html">Contact</a> | <a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a></p>
+     <!-- Updated footer links with simple .html extensions assuming separate files -->
   </footer>
+
   <script>
-    const toggle = document.getElementById('theme-toggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      if (document.body.classList.contains('dark-mode')) {
-        toggle.textContent = 'Light Mode';
-      } else {
-        toggle.textContent = 'Dark Mode';
+    // --- JavaScript Code ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      const dealsTableBody = document.querySelector('table tbody');
+      const regionFilterSelect = document.getElementById('region-filter');
+      const sortBySelect = document.getElementById('sort-by');
+      const sortDirectionButton = document.getElementById('sort-direction');
+      const currentYearSpan = document.getElementById('current-year');
+
+      let allDeals = []; // To store all fetched deals
+      let currentSort = { column: 'price', direction: 'asc' }; // Default sort
+
+      // Set current year in footer
+      currentYearSpan.textContent = new Date().getFullYear();
+
+
+      // Theme Toggle
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          themeToggle.textContent = 'Light Mode';
+        } else {
+          themeToggle.textContent = 'Dark Mode';
+        }
+      });
+
+      // Function to parse data/validity strings into numbers for sorting
+      function parseValue(value) {
+          if (typeof value === 'number') return value;
+          if (typeof value === 'string') {
+              if (value.toLowerCase() === 'unlimited') return Infinity; // Treat unlimited as a very large number
+              const match = value.match(/^(\d+)/);
+               if (match) return parseInt(match[1], 10); // Extract number from start of string (e.g., "5GB" -> 5, "30 days" -> 30)
+               // Handle other formats if needed, e.g., "1.5GB"
+               const floatMatch = value.match(/^(\d+(\.\d+)?)/);
+               if (floatMatch) return parseFloat(floatMatch[1]);
+          }
+          return 0; // Default for unparseable values
       }
-    });
+
+
+      // Function to sort deals
+      function sortDeals(deals, column, direction) {
+          return [...deals].sort((a, b) => {
+              let valA = a[column];
+              let valB = b[column];
+
+              // Special handling for sorting by price, data, validity
+              if (column === 'price' || column === 'data' || column === 'validity') {
+                   valA = parseValue(a[column]);
+                   valB = parseValue(b[column]);
+              } else if (column === 'provider' || column === 'region' || column === 'network') {
+                  // Case-insensitive string comparison for text columns
+                  valA = String(a[column] || '').toLowerCase(); // Handle potential null/undefined
+                  valB = String(b[column] || '').toLowerCase();
+              } else {
+                 // Default comparison for other types
+                 if (valA < valB) return direction === 'asc' ? -1 : 1;
+                 if (valA > valB) return direction === 'asc' ? 1 : -1;
+                 return 0; // Values are equal
+              }
+
+
+              if (valA < valB) return direction === 'asc' ? -1 : 1;
+              if (valA > valB) return direction === 'asc' ? 1 : -1;
+
+               // If values are equal, sort by another column (e.g., price) to ensure stable sort
+               if (column !== 'price') {
+                   const priceA = parseValue(a.price);
+                   const priceB = parseValue(b.price);
+                    if (priceA < priceB) return direction === 'asc' ? -1 : 1;
+                    if (priceA > priceB) return direction === 'asc' ? 1 : -1;
+               }
+
+
+              return 0; // Fallback if still equal
+          });
+      }
+
+
+      // Function to display deals in the table
+      function displayDeals(dealsToShow) {
+        dealsTableBody.innerHTML = ''; // Clear the table
+
+        if (dealsToShow.length === 0) {
+          dealsTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No deals found matching your criteria.</td></tr>';
+          return;
+        }
+
+        // Sort the deals before displaying
+        const sortedDeals = sortDeals(dealsToShow, currentSort.column, currentSort.direction);
+
+
+        sortedDeals.forEach(deal => {
+          const row = document.createElement('tr');
+
+          // Create features list HTML
+          const featuresHtml = deal.features && Array.isArray(deal.features) && deal.features.length > 0
+            ? `<ul class="features-list">${deal.features.map(f => `<li>${f}</li>`).join('')}</ul>`
+            : 'N/A';
+
+          // Create provider cell content with logo
+          const providerHtml = deal.providerLogoUrl
+             ? `<img src="${deal.providerLogoUrl}" alt="${deal.provider} logo" class="provider-logo"> ${deal.provider}`
+             : deal.provider;
+
+           // Handle cases where network is missing
+           const networkText = deal.network && deal.network.trim() !== '' ? deal.network : 'Varies';
+
+
+          row.innerHTML = `
+            <td data-label="Provider:">${providerHtml}</td>
+            <td data-label="Region:">${deal.region || 'N/A'}</td> <!-- Handle missing region -->
+            <td data-label="Data:">${deal.data || 'N/A'}</td> <!-- Handle missing data -->
+            <td data-label="Validity:">${deal.validity || 'N/A'}</td> <!-- Handle missing validity -->
+            <td data-label="Price:">${deal.price !== undefined ? `$${deal.price}` : 'N/A'}</td> <!-- Handle missing price -->
+            <td data-label="Network:">${networkText}</td>
+            <td data-label="Features:">${featuresHtml}</td>
+            <td data-label="Buy Now:"><a href="${deal.affiliateLink}" class="buy-button" target="_blank" rel="sponsored noopener noreferrer">Buy</a></td>
+          `;
+          // Added rel="noopener noreferrer" for security best practice with target="_blank"
+
+
+          dealsTableBody.appendChild(row);
+        });
+      }
+
+      // Function to populate the region filter dropdown
+      function populateRegionFilter(deals) {
+        // Get unique regions, filter out empty/null and add "all" back later
+        const regions = new Set(deals.map(deal => deal.region).filter(region => region));
+        const sortedRegions = Array.from(regions).sort(); // Convert to array and sort alphabetically
+
+        // Clear existing options except "All Regions"
+        regionFilterSelect.innerHTML = '<option value="all">All Regions</option>';
+
+
+        sortedRegions.forEach(region => {
+          const option = document.createElement('option');
+          option.value = region;
+          option.textContent = region;
+          regionFilterSelect.appendChild(option);
+        });
+      }
+
+      // Function to apply current filters and sorting
+      function applyFiltersAndSort() {
+          const selectedRegion = regionFilterSelect.value;
+
+          let filteredDeals = allDeals;
+
+          if (selectedRegion !== 'all') {
+            filteredDeals = allDeals.filter(deal => deal.region === selectedRegion);
+          }
+
+          // Apply other filters here if you add them later (e.g., data filter)
+
+          displayDeals(filteredDeals); // Display the filtered (and sorted inside displayDeals) results
+      }
+
+
+      // Event listeners for filters and sorting
+      regionFilterSelect.addEventListener('change', applyFiltersAndSort);
+
+      sortBySelect.addEventListener('change', (e) => {
+          currentSort.column = e.target.value;
+          // Optional: Reset direction to asc when changing column, or keep it
+          // currentSort.direction = 'asc';
+          applyFiltersAndSort();
+           // Update direction button icon based on the *new* sort direction
+           const directionIcon = sortDirectionButton.querySelector('svg path');
+           directionIcon.setAttribute('d', currentSort.direction === 'asc'
+               ? 'M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z' // Down arrow for Ascending
+               : 'M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z'); // Up arrow for Descending
+
+           sortDirectionButton.setAttribute('data-direction', currentSort.direction); // Update data attribute
+           sortDirectionButton.childNodes[0].nodeValue = currentSort.direction === 'asc' ? 'Asc' : 'Desc'; // Update text node
+
+      });
+
+      sortDirectionButton.addEventListener('click', () => {
+          currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+          applyFiltersAndSort(); // Re-apply sort with new direction
+
+          // Update button text, data attribute, and icon
+          sortDirectionButton.setAttribute('data-direction', currentSort.direction);
+          sortDirectionButton.childNodes[0].nodeValue = currentSort.direction === 'asc' ? 'Asc' : 'Desc';
+
+          const directionIcon = sortDirectionButton.querySelector('svg path');
+           directionIcon.setAttribute('d', currentSort.direction === 'asc'
+               ? 'M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z' // Down arrow for Ascending
+               : 'M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z'); // Up arrow for Descending
+
+      });
+
+
+      // Handle clicks on the "Popular Destinations" links to filter
+      document.querySelectorAll('.popular-destinations a[data-region-filter]').forEach(link => {
+          link.addEventListener('click', (e) => {
+              e.preventDefault(); // Stop the link from navigating
+              const regionToFilter = e.target.getAttribute('data-region-filter');
+              regionFilterSelect.value = regionToFilter; // Set the dropdown value
+              applyFiltersAndSort(); // Apply the filter
+
+              // Optional: Scroll to the table after filtering from a link
+              // Use requestAnimationFrame to ensure layout is updated before scrolling
+              requestAnimationFrame(() => {
+                  document.querySelector('.comparison-table').scrollIntoView({ behavior: 'smooth' });
+              });
+          });
+      });
+
+
+      // --- Initial Data Load ---
+      fetch('deals.json')
+        .then(response => {
+             if (!response.ok) {
+                 throw new Error(`HTTP error! status: ${response.status}`);
+             }
+             return response.json();
+        })
+        .then(deals => {
+          allDeals = deals; // Store all deals
+          console.log('Loaded deals:', allDeals);
+
+          populateRegionFilter(allDeals); // Fill the region filter dropdown
+
+          applyFiltersAndSort(); // Display initial data (filtered by default 'all', sorted by default 'price asc')
+
+        })
+        .catch(error => {
+          console.error('Error loading deals:', error);
+          dealsTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Error loading deals. Please ensure deals.json exists and is valid. Check the console for details.</td></tr>';
+        });
+
+    }); // End of DOMContentLoaded
   </script>
 </body>
 </html>
